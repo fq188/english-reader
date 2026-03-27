@@ -7,12 +7,12 @@ plugins {
 
 android {
     namespace = "com.htv.player"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.htv.player"
-        minSdk = 21
-        targetSdk = 34
+        minSdk = 24
+        targetSdk = 35
         versionCode = 2
         versionName = "1.1"
 
@@ -49,9 +49,6 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("androidx.activity:activity-ktx:1.8.1")
     implementation("androidx.fragment:fragment-ktx:1.6.2")
-
-    // Leanback for TV UI
-    implementation("androidx.leanback:leanback:1.0.0")
 
     // Material Design
     implementation("com.google.android.material:material:1.10.0")
