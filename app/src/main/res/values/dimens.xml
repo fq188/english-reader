@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Margins and Paddings -->
+    <dimen name="spacing_xs">4dp</dimen>
+    <dimen name="spacing_sm">8dp</dimen>
+    <dimen name="spacing_md">16dp</dimen>
+    <dimen name="spacing_lg">24dp</dimen>
+    <dimen name="spacing_xl">32dp</dimen>
+    <dimen name="spacing_xxl">48dp</dimen>
+
+    <!-- Text Sizes -->
+    <dimen name="text_size_caption">14sp</dimen>
+    <dimen name="text_size_body">18sp</dimen>
+    <dimen name="text_size_subtitle">20sp</dimen>
+    <dimen name="text_size_title">24sp</dimen>
+    <dimen name="text_size_headline">32sp</dimen>
+    <dimen name="text_size_display">48sp</dimen>
+
+    <!-- Card Dimensions -->
+    <dimen name="card_width_small">120dp</dimen>
+    <dimen name="card_height_small">160dp</dimen>
+    <dimen name="card_width_medium">160dp</dimen>
+    <dimen name="card_height_medium">220dp</dimen>
+    <dimen name="card_width_large">200dp</dimen>
+    <dimen name="card_height_large">280dp</dimen>
+    <dimen name="card_corner_radius">8dp</dimen>
+    <dimen name="card_elevation">4dp</dimen>
+
+    <!-- Poster Dimensions -->
+    <dimen name="poster_width_standard">120dp</dimen>
+    <dimen name="poster_height_standard">160dp</dimen>
+    <dimen name="poster_width_large">180dp</dimen>
+    <dimen name="poster_height_large">240dp</dimen>
+    <dimen name="poster_width_xlarge">220dp</dimen>
+    <dimen name="poster_height_xlarge">300dp</dimen>
+    <dimen name="poster_width_medium">140dp</dimen>
+    <dimen name="poster_height_medium">200dp</dimen>
+
+    <!-- Navigation -->
+    <dimen name="nav_width">240dp</dimen>
+    <dimen name="nav_icon_size">32dp</dimen>
+    <dimen name="nav_text_size">18sp</dimen>
+
+    <!-- Player -->
+    <dimen name="player_control_icon_size">48dp</dimen>
+    <dimen name="player_progress_height">4dp</dimen>
+    <dimen name="player_seekbar_height">8dp</dimen>
+
+    <!-- Focus States -->
+    <dimen name="focus_scale_normal">1.0</dimen>
+    <dimen name="focus_scale_selected">1.08</dimen>
+    <dimen name="focus_border_width">3dp</dimen>
+    <dimen name="focus_glow_radius">16dp</dimen>
+
+    <!-- Grid -->
+    <dimen name="grid_item_spacing">16dp</dimen>
+    <dimen name="grid_header_height">48dp</dimen>
+
+    <!-- Download -->
+    <dimen name="download_item_height">72dp</dimen>
+    <dimen name="download_progress_height">4dp</dimen>
+    <dimen name="storage_bar_height">8dp</dimen>
+
+    <!-- Search -->
+    <dimen name="search_input_height">56dp</dimen>
+    <dimen name="search_result_item_height">80dp</dimen>
+
+    <!-- EPG -->
+    <dimen name="epg_channel_width">100dp</dimen>
+    <dimen name="epg_item_height">60dp</dimen>
+    <dimen name="epg_time_slot_width">80dp</dimen>
+
+    <!-- Toolbar -->
+    <dimen name="toolbar_height">64dp</dimen>
+    <dimen name="tab_height">48dp</dimen>
+
+    <!-- Dialog -->
+    <dimen name="dialog_min_width">400dp</dimen>
+    <dimen name="dialog_max_width">600dp</dimen>
+</resources>

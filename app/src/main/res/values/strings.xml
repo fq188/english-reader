@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">高清影音</string>
+
+    <!-- Navigation -->
+    <string name="nav_live_tv">电视直播</string>
+    <string name="nav_vod">影视点播</string>
+    <string name="nav_movie">电影</string>
+    <string name="nav_drama">电视剧</string>
+    <string name="nav_anime">动漫</string>
+    <string name="nav_overseas">海外剧</string>
+    <string name="nav_opera">戏曲</string>
+    <string name="nav_search">搜索</string>
+    <string name="nav_downloads">我的下载</string>
+    <string name="nav_settings">设置</string>
+
+    <!-- Live TV -->
+    <string name="live_tv_title">高清电视直播</string>
+    <string name="channel_list">频道列表</string>
+    <string name="no_channel">暂无频道</string>
+    <string name="channel_switch">正在切换频道…</string>
+    <string name="source_unavailable">当前信号不稳定，正在切换信号源…</string>
+    <string name="epg_title">节目预告</string>
+    <string name="no_epg">暂无节目信息</string>
+
+    <!-- VOD -->
+    <string name="vod_title">影视点播大厅</string>
+    <string name="latest_updates">最新上线</string>
+    <string name="hot_recommend">热门推荐</string>
+    <string name="high_score">高分经典</string>
+    <string name="all_loaded">已加载全部</string>
+    <string name="loading">加载中…</string>
+    <string name="refresh">刷新</string>
+
+    <!-- Detail -->
+    <string name="score">评分</string>
+    <string name="year">年份</string>
+    <string name="director">导演</string>
+    <string name="actors">主演</string>
+    <string name="synopsis">简介</string>
+    <string name="episodes">选集</string>
+    <string name="play_from_begin">从开头播放</string>
+    <string name="continue_play">继续播放</string>
+    <string name="download_series">缓存本剧</string>
+    <string name="season_format">第%d季</string>
+    <string name="episode_format">第%d集</string>
+
+    <!-- Player -->
+    <string name="playback_speed">播放速度</string>
+    <string name="video_quality">画质</string>
+    <string name="subtitle">字幕</string>
+    <string name="audio_track">音轨</string>
+    <string name="speed_05x">0.5x</string>
+    <string name="speed_075x">0.75x</string>
+    <string name="speed_1x">1.0x</string>
+    <string name="speed_125x">1.25x</string>
+    <string name="speed_15x">1.5x</string>
+    <string name="speed_2x">2.0x</string>
+
+    <!-- Search -->
+    <string name="search_hint">输入片名或演员名</string>
+    <string name="search_empty">未找到相关结果</string>
+    <string name="search_history">搜索历史</string>
+    <string name="clear_history">清空历史</string>
+    <string name="hot_search">热门搜索</string>
+    <string name="voice_search">语音搜索</string>
+
+    <!-- Download -->
+    <string name="download_manager">下载管理</string>
+    <string name="download_center">缓存中心</string>
+    <string name="downloading">下载中</string>
+    <string name="downloaded">已完成</string>
+    <string name="download_paused">已暂停</string>
+    <string name="download_failed">下载失败</string>
+    <string name="download_waiting">等待中</string>
+    <string name="download_speed">%s/s</string>
+    <string name="storage_used">已用 %1$s / 总共 %2$s</string>
+    <string name="storage_low">存储空间不足</string>
+    <string name="storage_warning">剩余空间不足10%%，请及时清理</string>
+    <string name="select_quality">选择画质</string>
+    <string name="quality_sd">标清 480P</string>
+    <string name="quality_hd">高清 720P</string>
+    <string name="quality_fhd">超清 1080P</string>
+    <string name="estimated_size">约 %s</string>
+    <string name="download_all">缓存全集</string>
+    <string name="download_selected">缓存选中</string>
+    <string name="pause_all">全部暂停</string>
+    <string name="resume_all">全部开始</string>
+    <string name="delete_download">删除</string>
+    <string name="pause">暂停</string>
+    <string name="resume">继续</string>
+    <string name="confirm_delete">确认删除？</string>
+    <string name="download_path">下载路径</string>
+    <string name="select_storage">选择存储位置</string>
+    <string name="internal_storage">内部存储</string>
+    <string name="external_storage">外接设备</string>
+    <string name="auto_delete">看完自动删除</string>
+    <string name="usb_removed">存储设备已断开</string>
+    <string name="usb_removed_tip">正在下载的任务已暂停，请检查存储设备</string>
+
+    <!-- Settings -->
+    <string name="settings_title">设置</string>
+    <string name="play_settings">播放设置</string>
+    <string name="default_quality">默认画质</string>
+    <string name="default_subtitle">默认字幕</string>
+    <string name="auto_play">自动续播</string>
+    <string name="storage_settings">存储设置</string>
+    <string name="download_settings">下载设置</string>
+    <string name="default_download_path">默认下载路径</string>
+    <string name="max_concurrent_downloads">最大同时下载数</string>
+    <string name="about">关于</string>
+    <string name="version">版本</string>
+    <string name="check_update">检查更新</string>
+
+    <!-- Common -->
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+    <string name="ok">好的</string>
+    <string name="error">出错了</string>
+    <string name="retry">重试</string>
+    <string name="no_network">网络不可用</string>
+    <string name="unknown_error">未知错误</string>
+</resources>

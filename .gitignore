@@ -72,12 +72,28 @@
 **/.mypy_cache/
 **/.ruff_cache/
 
-# Java
-*.class
-*.jar
-*.war
-*.ear
-**/.gradle/
+# Android
+**/android/.gradle/
+**/android/gradle/
+**/android/gradlew
+**/android/gradlew.bat
+**/android/local.properties
+**/build/
+**/app/build/
+**/app/*.apk
+**/app/*.aab
+**/*.apk
+**/*.ap_
+**/*.dex
+**/*.odex
+**/captures/
+**/.externalNativeBuild/
+**/.cxx/
+**/*.so
+**/gen/
+
+# Local configuration
+local.properties
 
 # C/C++/Go/Rust
 *.o

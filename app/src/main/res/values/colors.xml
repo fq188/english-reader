@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary colors -->
+    <color name="primary">#FF6200EE</color>
+    <color name="primary_dark">#FF3700B3</color>
+    <color name="primary_variant">#FF3700B3</color>
+    <color name="secondary">#FF03DAC6</color>
+    <color name="secondary_variant">#FF018786</color>
+
+    <!-- Background colors -->
+    <color name="background_dark">#FF121212</color>
+    <color name="surface_dark">#FF1E1E1E</color>
+    <color name="surface_elevated">#FF2D2D2D</color>
+    <color name="card_background">#FF242424</color>
+
+    <!-- Text colors -->
+    <color name="text_primary">#FFFFFFFF</color>
+    <color name="text_secondary">#B3FFFFFF</color>
+    <color name="text_tertiary">#80FFFFFF</color>
+    <color name="text_hint">#4DFFFFFF</color>
+
+    <!-- Focus/Highlight colors -->
+    <color name="focus_highlight">#FFFF9800</color>
+    <color name="focus_glow">#40FF9800</color>
+    <color name="focus_background">#33FF9800</color>
+
+    <!-- Status colors -->
+    <color name="success">#FF4CAF50</color>
+    <color name="warning">#FFFFC107</color>
+    <color name="error">#FFF44336</color>
+    <color name="info">#FF2196F3</color>
+
+    <!-- Download status colors -->
+    <color name="download_progress">#FF4CAF50</color>
+    <color name="download_paused">#FFFFC107</color>
+    <color name="download_error">#FFF44336</color>
+    <color name="storage_warning">#FFFF5722</color>
+
+    <!-- Channel category colors -->
+    <color name="category_cctv">#FFE53935</color>
+    <color name="category_local">#FF43A047</color>
+    <color name="category_kids">#FFAB47BC</color>
+    <color name="category_sports">#FF00ACC1</color>
+
+    <!-- Overlay -->
+    <color name="overlay_dark">#CC000000</color>
+    <color name="overlay_light">#80000000</color>
+
+    <!-- Divider -->
+    <color name="divider">#1FFFFFFF</color>
+
+    <!-- Transparent -->
+    <color name="transparent">#00000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
+</resources>
