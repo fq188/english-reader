@@ -1,15 +1,23 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { open } from '@tauri-apps/plugin-dialog';
-import { TabBar, Toolbar } from './components/common/Toolbar';
+import { TabBar } from './components/common/TabBar';
+import { Toolbar } from './components/common/Toolbar';
 import PDFReader from './components/reader/PDFReader';
+import LibraryPanel from './components/library/LibraryPanel';
+import DropZone from './components/library/DropZone';
 import { useDocumentStore, Document } from './stores/documentStore';
 import { useVocabularyStore } from './stores/vocabularyStore';
 import { useAISummaryStore } from './stores/aiStore';
 import { generateId } from './utils/helpers';
+import { saveDocument } from './utils/database';
 import './index.css';
 
+type ViewMode = 'reader' | 'library';
+type SidebarTab = 'info' | 'notes' | 'ai' | 'vocabulary';
+
 function App() {
-  const [activeSidebarTab, setActiveSidebarTab] = useState<'info' | 'notes' | 'ai' | 'vocabulary'>('info');
+  const [viewMode, setViewMode] = useState<ViewMode>('library');
+  const [activeSidebarTab, setActiveSidebarTab] = useState<SidebarTab>('info');
   const {
     currentDocument,
     openTabs,
@@ -53,14 +61,80 @@ function App() {
           tags: [],
         };
         
+        await saveDocument({
+          id: newDoc.id,
+          title: newDoc.title,
+          authors: JSON.stringify(newDoc.authors),
+          year: newDoc.year,
+          journal: newDoc.journal,
+          file_path: newDoc.filePath,
+          file_hash: newDoc.fileHash,
+          cover_image: newDoc.coverImage || null,
+          created_at: newDoc.createdAt.toISOString(),
+          last_read_at: null,
+          last_page: newDoc.lastPage,
+          total_pages: newDoc.totalPages,
+          tags: JSON.stringify(newDoc.tags),
+          folder_id: newDoc.folderId || null,
+        });
+        
         addDocument(newDoc);
         openTab(newDoc);
         setCurrentDocument(newDoc);
+        setViewMode('reader');
       }
     } catch (error) {
       console.error('Error opening file:', error);
     }
   }, [addDocument, openTab, setCurrentDocument]);
+  
+  const handleFileDrop = useCallback(async (filePath: string, fileName: string) => {
+    const newDoc: Document = {
+      id: generateId(),
+      title: fileName.replace(/\.[^/.]+$/, ''),
+      authors: [],
+      year: 0,
+      journal: '',
+      filePath: filePath,
+      fileHash: '',
+      createdAt: new Date(),
+      lastPage: 1,
+      totalPages: 0,
+      tags: [],
+    };
+    
+    try {
+      await saveDocument({
+        id: newDoc.id,
+        title: newDoc.title,
+        authors: JSON.stringify(newDoc.authors),
+        year: newDoc.year,
+        journal: newDoc.journal,
+        file_path: newDoc.filePath,
+        file_hash: newDoc.fileHash,
+        cover_image: newDoc.coverImage || null,
+        created_at: newDoc.createdAt.toISOString(),
+        last_read_at: null,
+        last_page: newDoc.lastPage,
+        total_pages: newDoc.totalPages,
+        tags: JSON.stringify(newDoc.tags),
+        folder_id: newDoc.folderId || null,
+      });
+      
+      addDocument(newDoc);
+      openTab(newDoc);
+      setCurrentDocument(newDoc);
+      setViewMode('reader');
+    } catch (error) {
+      console.error('Failed to import document:', error);
+    }
+  }, [addDocument, openTab, setCurrentDocument]);
+  
+  const handleOpenDocument = useCallback((doc: Document) => {
+    openTab(doc);
+    setCurrentDocument(doc);
+    setViewMode('reader');
+  }, [openTab, setCurrentDocument]);
   
   const handleZoomIn = useCallback(() => {
     setZoom(zoom + 10);
@@ -76,6 +150,9 @@ function App() {
       const remainingTabs = openTabs.filter(t => t.id !== id);
       setCurrentDocument(remainingTabs[remainingTabs.length - 1] || null);
     }
+    if (openTabs.length <= 1) {
+      setViewMode('library');
+    }
   }, [closeTab, currentTabId, openTabs, setCurrentDocument]);
   
   useEffect(() => {
@@ -85,71 +162,52 @@ function App() {
   }, [currentTabId, currentTab, setCurrentDocument]);
   
   return (
-    <div className="h-screen flex flex-col">
-      <Toolbar
-        onOpenFile={handleOpenFile}
-        onZoomIn={handleZoomIn}
-        onZoomOut={handleZoomOut}
-        zoom={zoom}
-      />
-      
-      {openTabs.length > 0 && (
-        <TabBar onCloseTab={handleCloseTab} />
-      )}
-      
-      <div className="flex-1 flex overflow-hidden">
-        <div className="flex-1 overflow-hidden">
-          {currentTab ? (
-            <PDFReader document={currentTab} />
-          ) : (
-            <div className="h-full flex flex-col items-center justify-center bg-gray-50">
-              <div className="text-center">
-                <svg
-                  className="w-24 h-24 mx-auto text-gray-300 mb-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1}
-                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                  />
-                </svg>
-                <h2 className="text-xl font-semibold text-gray-600 mb-2">
-                  欢迎使用 English Reader
-                </h2>
-                <p className="text-gray-500 mb-6">
-                  打开 PDF 文件开始阅读英文文献
-                </p>
-                <button
-                  onClick={handleOpenFile}
-                  className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
-                >
-                  打开文件
-                </button>
+    <DropZone onFileDrop={handleFileDrop}>
+      <div className="h-screen flex flex-col">
+        <Toolbar
+          onOpenFile={handleOpenFile}
+          onZoomIn={handleZoomIn}
+          onZoomOut={handleZoomOut}
+          zoom={zoom}
+          showZoomControls={viewMode === 'reader'}
+          onBackToLibrary={() => setViewMode('library')}
+          showBackButton={viewMode === 'reader'}
+        />
+        
+        {viewMode === 'reader' && openTabs.length > 0 && (
+          <TabBar onCloseTab={handleCloseTab} />
+        )}
+        
+        <div className="flex-1 flex overflow-hidden">
+          <div className="flex-1 overflow-hidden">
+            {viewMode === 'reader' && currentTab ? (
+              <PDFReader document={currentTab} />
+            ) : (
+              <div className="h-full bg-white">
+                <LibraryPanel onOpenDocument={handleOpenDocument} />
               </div>
+            )}
+          </div>
+          
+          {viewMode === 'reader' && (
+            <div className="w-80 bg-white border-l border-gray-200 flex flex-col">
+              <Sidebar
+                activeTab={activeSidebarTab}
+                onTabChange={setActiveSidebarTab}
+                vocabularyCount={vocabularyItems.length}
+                currentDocument={currentDocument}
+              />
             </div>
           )}
         </div>
-        
-        <div className="w-80 bg-white border-l border-gray-200 flex flex-col">
-          <Sidebar
-            activeTab={activeSidebarTab}
-            onTabChange={setActiveSidebarTab}
-            vocabularyCount={vocabularyItems.length}
-            currentDocument={currentDocument}
-          />
-        </div>
       </div>
-    </div>
+    </DropZone>
   );
 }
 
 interface SidebarProps {
-  activeTab: 'info' | 'notes' | 'ai' | 'vocabulary';
-  onTabChange: (tab: 'info' | 'notes' | 'ai' | 'vocabulary') => void;
+  activeTab: SidebarTab;
+  onTabChange: (tab: SidebarTab) => void;
   vocabularyCount: number;
   currentDocument: Document | null;
 }
@@ -193,7 +251,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange, vocabularyCou
       <div className="flex-1 overflow-y-auto p-4">
         {activeTab === 'info' && <DocumentInfoPanel document={currentDocument} />}
         {activeTab === 'notes' && <NotesPanel />}
-        {activeTab === 'ai' && <AIPanel summary={summary} isGenerating={isGenerating} />}
+        {activeTab === 'ai' && <AIPanel summary={summary} isGenerating={isGenerating} documentId={currentDocument?.id} />}
         {activeTab === 'vocabulary' && <VocabularyPanel items={items} onRemove={removeItem} />}
       </div>
     </>
@@ -235,12 +293,16 @@ const DocumentInfoPanel: React.FC<{ document: Document | null }> = ({ document }
 };
 
 const NotesPanel: React.FC = () => {
+  const [content, setContent] = useState('');
+  
   return (
     <div className="space-y-4">
       <h3 className="font-semibold">阅读笔记</h3>
       <textarea
         className="w-full h-64 p-3 border border-gray-200 rounded resize-none focus:outline-none focus:border-blue-500"
         placeholder="在此输入笔记，支持 Markdown 格式..."
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
       />
     </div>
   );
@@ -249,9 +311,10 @@ const NotesPanel: React.FC = () => {
 interface AIPanelProps {
   summary: string;
   isGenerating: boolean;
+  documentId?: string;
 }
 
-const AIPanel: React.FC<AIPanelProps> = ({ summary, isGenerating }) => {
+const AIPanel: React.FC<AIPanelProps> = ({ summary, isGenerating, documentId }) => {
   const error = useAISummaryStore((state) => state.error);
   
   return (
@@ -260,7 +323,8 @@ const AIPanel: React.FC<AIPanelProps> = ({ summary, isGenerating }) => {
         <h3 className="font-semibold">AI 论文总结</h3>
         <button
           className="px-3 py-1 bg-blue-500 text-white text-sm rounded hover:bg-blue-600 disabled:opacity-50"
-          disabled={isGenerating}
+          disabled={isGenerating || !documentId}
+          title={!documentId ? '请先打开文档' : ''}
         >
           {isGenerating ? '生成中...' : '生成总结'}
         </button>
