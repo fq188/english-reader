@@ -4,113 +4,49 @@
     android:id="@+id/swipeRefresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_dark"
-    android:focusable="true"
-    android:focusableInTouchMode="true">
+    android:background="@color/background_dark">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:orientation="vertical"
+        android:paddingVertical="@dimen/spacing_md">
 
-        <LinearLayout
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_lg"
+            android:text="@string/vod_title"
+            android:textColor="@color/text_primary"
+            android:textSize="@dimen/text_size_headline"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/categoryTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_lg"
+            android:layout_marginTop="@dimen/spacing_sm"
+            android:text="全部"
+            android:textColor="@color/focus_highlight"
+            android:textSize="@dimen/text_size_body" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/categoryList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingVertical="@dimen/spacing_md">
+            android:layout_marginTop="@dimen/spacing_md"
+            android:clipToPadding="false"
+            android:paddingHorizontal="@dimen/spacing_lg" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_lg"
-                android:text="@string/vod_title"
-                android:textColor="@color/text_primary"
-                android:textSize="@dimen/text_size_headline"
-                android:textStyle="bold" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/videoGrid"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/spacing_md"
+            android:layout_weight="1"
+            android:clipToPadding="false"
+            android:paddingHorizontal="@dimen/spacing_lg" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/categoryList"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_md"
-                android:clipToPadding="false"
-                android:paddingHorizontal="@dimen/spacing_lg" />
-
-            <LinearLayout
-                android:id="@+id/latestSection"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_lg"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_lg"
-                    android:text="@string/latest_updates"
-                    android:textColor="@color/text_primary"
-                    android:textSize="@dimen/text_size_subtitle"
-                    android:textStyle="bold" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/latestList"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_sm"
-                    android:clipToPadding="false"
-                    android:paddingHorizontal="@dimen/spacing_lg" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/hotSection"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_lg"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_lg"
-                    android:text="@string/hot_recommend"
-                    android:textColor="@color/text_primary"
-                    android:textSize="@dimen/text_size_subtitle"
-                    android:textStyle="bold" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/hotList"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_sm"
-                    android:clipToPadding="false"
-                    android:paddingHorizontal="@dimen/spacing_lg" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/highScoreSection"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_lg"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_lg"
-                    android:text="@string/high_score"
-                    android:textColor="@color/text_primary"
-                    android:textSize="@dimen/text_size_subtitle"
-                    android:textStyle="bold" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/highScoreList"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_sm"
-                    android:clipToPadding="false"
-                    android:paddingHorizontal="@dimen/spacing_lg" />
-            </LinearLayout>
-
-        </LinearLayout>
-    </ScrollView>
+    </LinearLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

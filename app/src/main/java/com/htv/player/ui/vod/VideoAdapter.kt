@@ -8,14 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.htv.player.R
 import com.htv.player.data.model.Video
-import com.htv.player.databinding.ItemVideoCardBinding
+import com.htv.player.databinding.ItemVideoGridBinding
 
 class VideoAdapter(
     private val onVideoClick: (Video) -> Unit
 ) : ListAdapter<Video, VideoAdapter.VideoViewHolder>(VideoDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideoViewHolder {
-        val binding = ItemVideoCardBinding.inflate(
+        val binding = ItemVideoGridBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -28,7 +28,7 @@ class VideoAdapter(
     }
 
     inner class VideoViewHolder(
-        private val binding: ItemVideoCardBinding
+        private val binding: ItemVideoGridBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         init {
@@ -44,6 +44,7 @@ class VideoAdapter(
             binding.videoTitle.text = video.title
             binding.videoRating.text = String.format("%.1f", video.rating)
             binding.videoYear.text = video.year?.toString() ?: ""
+            binding.videoCategories.text = video.categories.joinToString(" / ")
 
             Glide.with(binding.root.context)
                 .load(video.poster)
@@ -54,15 +55,13 @@ class VideoAdapter(
 
             binding.root.setOnFocusChangeListener { _, hasFocus ->
                 if (hasFocus) {
-                    binding.root.scaleX = 1.08f
-                    binding.root.scaleY = 1.08f
+                    binding.root.scaleX = 1.05f
+                    binding.root.scaleY = 1.05f
                     binding.root.setBackgroundResource(R.drawable.bg_focus_highlight)
-                    binding.root.elevation = 8f
                 } else {
                     binding.root.scaleX = 1.0f
                     binding.root.scaleY = 1.0f
                     binding.root.setBackgroundResource(R.drawable.bg_card)
-                    binding.root.elevation = 4f
                 }
             }
         }
