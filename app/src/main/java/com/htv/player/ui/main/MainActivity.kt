@@ -2,6 +2,7 @@ package com.htv.player.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.FragmentActivity
 import com.htv.player.R
 import com.htv.player.ui.live.LiveTvFragment
@@ -15,6 +16,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : FragmentActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private val isTvVersion: Boolean
+        get() = packageName.endsWith(".tv")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,9 +26,18 @@ class MainActivity : FragmentActivity() {
 
         setupNavigation()
         setupFocusListeners()
+        setupLayout()
 
         if (savedInstanceState == null) {
-            showLiveTvFragment()
+            showVodFragment()
+        }
+    }
+
+    private fun setupLayout() {
+        if (isTvVersion) {
+            binding.navigation.visibility = View.VISIBLE
+        } else {
+            binding.navigation.visibility = View.GONE
         }
     }
 
@@ -100,6 +112,7 @@ class MainActivity : FragmentActivity() {
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         val fragment = supportFragmentManager.findFragmentById(R.id.fragmentContainer)
         if (fragment != null && supportFragmentManager.backStackEntryCount > 0) {

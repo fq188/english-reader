@@ -10,13 +10,28 @@ android {
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.htv.player"
         minSdk = 24
         targetSdk = 35
-        versionCode = 3
+        versionCode = 4
         versionName = "1.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    flavorDimensions += "platform"
+    productFlavors {
+        create("phone") {
+            dimension = "platform"
+            applicationIdSuffix = ".phone"
+            versionNameSuffix = "-phone"
+            resValue("string", "app_name", "高清影音")
+        }
+        create("tv") {
+            dimension = "platform"
+            applicationIdSuffix = ".tv"
+            versionNameSuffix = "-tv"
+            resValue("string", "app_name", "高清影音TV")
+        }
     }
 
     buildTypes {

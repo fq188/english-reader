@@ -2,6 +2,7 @@ package com.htv.player.data.repository
 
 import com.htv.player.data.api.ApiService
 import com.htv.player.data.model.SearchResult
+import com.htv.player.data.model.Video
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -12,6 +13,7 @@ class SearchRepository @Inject constructor(
     private val apiService: ApiService
 ) {
     private val searchHistory = mutableListOf<String>()
+    private val vodRepository = VodRepository(apiService)
 
     suspend fun search(keyword: String): Result<SearchResult> = withContext(Dispatchers.IO) {
         try {
@@ -19,7 +21,11 @@ class SearchRepository @Inject constructor(
             addToHistory(keyword)
             Result.success(result)
         } catch (e: Exception) {
-            Result.failure(e)
+            val videos = vodRepository.getDemoVideos().filter {
+                it.title.contains(keyword, ignoreCase = true)
+            }
+            addToHistory(keyword)
+            Result.success(SearchResult(videos, emptyList()))
         }
     }
 
